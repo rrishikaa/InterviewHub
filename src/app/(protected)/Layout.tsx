@@ -22,9 +22,7 @@ export default function ProtectedLayout({
       }
     },[isAuthenticated, router]);
 
-     if (!isAuthenticated) {
-        return null; // or loader
-    }
+     
    
   return (
     <html lang="en">
