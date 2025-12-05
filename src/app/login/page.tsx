@@ -1,6 +1,6 @@
 "use client"
 
-import {useAuth } from "@/context/AuthContext";
+import {useAuth } from "@/app/context/AuthContext";
 
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
@@ -10,11 +10,13 @@ export default function Login(){
     const [email, setEmail]= useState("")
 
     const router = useRouter();
+  
 
     const handleSubmit= (e: React.FormEvent)=>{
+     
         e.preventDefault();
         login(email);
-        router.push("/");
+        router.push("/dashboard");
     }
 
     return (
