@@ -7,7 +7,8 @@ import { useState } from "react";
 
 export default function Login(){
     const {login} = useAuth();
-    const [email, setEmail]= useState("")
+    const [email, setEmail]= useState("");
+    const[password,setPassword]= useState("");
 
     const router = useRouter();
   
@@ -15,13 +16,17 @@ export default function Login(){
     const handleSubmit= (e: React.FormEvent)=>{
      
         e.preventDefault();
-        login(email);
+        login(email,password);
         router.push("/dashboard");
     }
 
     return (
         <div className="w-screen h-screen bg-white flex flex-col justify-center items-center">
-        
+            <div className="mb-8 border border-gray-300 rounded-lg p-8 shadow-lg">
+                {/* <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
+                    Login to InterviewHUB
+                </h1>
+            </div> */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center justify-center">
             <input 
                 type ="email" placeholder="Enter your email" 
@@ -29,9 +34,17 @@ export default function Login(){
                 value={email} 
                 onChange ={(e)=>setEmail(e.target.value)}
                 required />
+                   <input 
+                type ="password" placeholder="Your password here." 
+                className="p-4 border border-gray-400 rounded-lg w-80 text-neutral-950" 
+                value={password} 
+                onChange ={(e)=>setPassword(e.target.value)}
+                required />
            
-            <button type="submit" className="w-full p-4 flex justify-center bg-amber-700 text-lg text-blue-50 rounded-md" >Login</button> 
+            <button type="submit" className="w-full p-4 flex justify-center bg-[#004E92] text-lg text-blue-50 rounded-md hover:shadow-lg hover:bg-[#0061b6]" >Login</button> 
              </form>
+
+             </div>
             </div>
        
     )

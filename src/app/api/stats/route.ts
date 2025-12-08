@@ -1,4 +1,5 @@
-import fs from 'fs';
+
+
 import { NextResponse } from 'next/server';
 import {mockdata} from '../../lib/mockdata'
 

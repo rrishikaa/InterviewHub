@@ -1,15 +1,16 @@
 "use client";
 
-import { useContext, useEffect , createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 
 type User= {
     email: string|null;
+    password: string|null;
     
 }
 
 type AuthContextType=  {
     user: User|null;
-    login: (email:string)  => void;
+    login: (email:string, password:string)  => void;
     logout:() =>void;
     isAuthenticated: boolean;
 }
@@ -19,29 +20,28 @@ type AuthContextType=  {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 
+
 export function AuthProvider({children}: {children: React.ReactNode}){
     const [user, setUser] = useState<User|null>(null);
     const isAuthenticated = !!user;
+   
+     
 
-    // useEffect(()=>{
-    //     const saveUser = localStorage.getItem("user");
-    //     if(saveUser){
-    //         setUser(JSON.parse(saveUser));
-    //     }
-    // },[]
-    // );
-
-    function login(email:string ){
-        const newUser:User ={email};
+    function login(email:string , password:string){
+        const newUser:User ={email , password};
          setUser(newUser);
         localStorage.setItem("user" , JSON.stringify(newUser));
-         
+        
     }
-    
+    useEffect(() => {
+    console.log("User :", user);
+    }, [user]);
+
 
     function logout(){
         setUser(null);
         localStorage.removeItem("user");
+        
    
     }
 
@@ -60,3 +60,4 @@ export function useAuth(){
     }
     return ctx;
 }
+

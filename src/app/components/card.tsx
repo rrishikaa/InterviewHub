@@ -1,6 +1,6 @@
 "use client";
 
-import {useState, useEffect } from "react";
+
 
 interface CardProps {
     title: string ;

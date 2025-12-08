@@ -1,7 +1,7 @@
 "use client";
 
-import { AuthProvider, useAuth } from "@/app/context/AuthContext"; 
-import "./globals.css";
+import { useAuth } from "@/app/context/AuthContext"; 
+
 import {useRouter} from 'next/navigation';
 import { useEffect } from "react";
 
@@ -10,9 +10,11 @@ export default function ProtectedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-    const router = useRouter();
+ 
     const {isAuthenticated} = useAuth();
+
+    console.log("Protected Layout Check: isAuthenticated =", isAuthenticated);
+    const router = useRouter();
      
     useEffect(()=>{
 
@@ -22,17 +24,11 @@ export default function ProtectedLayout({
       }
     },[isAuthenticated, router]);
 
-     
+   if (!isAuthenticated) return null;
    
-  return (
-    <html lang="en">
-      <body
-        
-      >
-        <AuthProvider>
+  return ( 
+       <>
         {children}
-        </AuthProvider>
-      </body>
-    </html>
+      </> 
   );
 }
