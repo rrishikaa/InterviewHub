@@ -1,6 +1,8 @@
 
 import Card from "@/app/components/card";
 
+import Link from "next/link";
+
 
 export async function GETdata(){
 
@@ -12,8 +14,11 @@ export async function GETdata(){
   return data;
 
 }
+  
 
 export default async function Dashboard() {
+
+
 
   const {numOfQues, numOfNotes, lastQuizScore} =  await GETdata();
 
@@ -27,21 +32,28 @@ export default async function Dashboard() {
       Welcome to the Dashboard!
     </h1>
     <div className="flex flex-col sm:flex-row gap-4 space-x-4 mt-6 pt-12 text-lg text-gray-700 dark:text-gray-300 justify-center items-center">
-    <Card title="No. of Questions" content={numOfQues} />
-    <Card title="No. of Notes" content={numOfNotes} />
-    <Card title="Last Quiz Score" content={lastQuizScore} />
+    <Card title=" Questions" content={numOfQues} />
+    <Card title=" Notes" content={numOfNotes} />
+    <Card title="Quiz Score" content={lastQuizScore} />
     </div>
 
     <div className="mt-8 flex space-x-4 justify-center items-center py-8">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <Link href="/dashboard/mcq">
+        <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8]">
             MCQ
         </button>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        </Link>
+        <Link href="/dashboard/flashcard">
+        <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8]">
             Flahcards
         </button>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        </Link> 
+        <Link href="/dashboard/myNotes">
+        <button className=" px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8]">
             My Notes
-        </button>
+            </button>
+        </Link>
+        
 
        
     </div>

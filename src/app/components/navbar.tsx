@@ -18,9 +18,7 @@ export default function Navbar(){
         const handleLogout = (e:React.FormEvent)=>{
         
           e.preventDefault();
-          logout();
-          
-        
+          logout();       
         }
         
         useEffect(()=>{
@@ -29,7 +27,7 @@ export default function Navbar(){
         
 
     return(
-        <nav className="w-full h-16 bg-gray-300 flex items-end-center px-4 text-white">
+        <nav className="w-full h-16 bg-gray-300 flex items-end-center px-4 text-white sticky top-0 z-50 ">
                 <Link href="/" >
                 <h1 className="text-[#004E92] text-2xl font-bold text-start align-middle p-4">
                     InterviewHUB
