@@ -68,11 +68,11 @@ export default function McqQues() {
      console.log("selected",selectedOption);
    
      const handlePrev = () =>{
-            if(index > 0 || index ==questions.length - 1){
+            if(index > 0 ){
                 setIndex(index-1);
                 
             }
-            // setDisablded(true);
+            setDisablded(true);
             console.log("clicked Prev")
             setAnswer(prev => ({
                  ...prev , questionId : selectedOption}))
