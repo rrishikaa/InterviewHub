@@ -1,5 +1,6 @@
 "use client";
 
+
 import QuizResultCard from "./quizResultCard";
 import { useState} from "react";
 
@@ -40,17 +41,19 @@ export default function McqQues() {
 
     const currentQuestion = questions[index];
     
-    console.log("initial", score);
+
+    // const showAnswer= answer ? !!answer[currentQuestion.id] : false
+    
+
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-        
+
         const answerone = Number(e.target.value);
         setSelectedOption(answerone);
         
-        
-        setAnswer(prev => ({...prev , [currentQuestion.id]:answerone  }))
-        console.log("hello")
-            
+
+        setAnswer(prev => ({...prev , [currentQuestion.id] :answerone  }))
+          
     }
     const handleSubmit = () =>{
 
@@ -58,7 +61,7 @@ export default function McqQues() {
                 setScore(score+1)}
             console.log("submit:" ,score)
             setClicked(true);
-            // setDisablded(true);
+            setDisablded(true);
             console.log(disablded);
     }
 
@@ -66,17 +69,21 @@ export default function McqQues() {
     
     
      console.log("selected",selectedOption);
+     console.log("current", currentQuestion.id);
    
      const handlePrev = () =>{
-            if(index > 0 ){
+            if(index > 0 && index <= questions.length - 1){
                 setIndex(index-1);
                 
             }
-            setDisablded(true);
             console.log("clicked Prev")
+             console.log("prev", currentQuestion.id);
+            if(selectedOption != null){
             setAnswer(prev => ({
-                 ...prev , questionId : selectedOption}))
-                  console.log("I am Previous")
+                ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
+            }
+           
+             console.log("anwer: ", answer);
             
     }
     
@@ -84,20 +91,22 @@ export default function McqQues() {
     const handleNext = () =>{
             if(index >= 0){
                 setIndex(index+1);
+               
                 setSelectedOption(null);
                 if(selectedOption == currentQuestion.answer)  {
                 setScore(score+1)
                 console.log("Score:" ,score)
-                setDisablded(true);
             } 
             }
-            console.log("clicked Next");
-            //  setAnswer(next => ({
-            //      ...next , questionId : selectedOption}))
-            
+             if(selectedOption != null){
+            setAnswer(prev => ({
+                ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
+            }
+            console.log("clicked Next")
+               console.log("answer map", answer); 
     }
 
-   
+ 
 
 
     return (
@@ -121,8 +130,8 @@ export default function McqQues() {
                             name="mcq"
                             value={index}
                             onChange={handleOnChange}
-                            checked = {selectedOption == index}
-                            disabled={answer[currentQuestion.id] !== undefined }
+                            checked = {selectedOption === index}
+                            disabled={selectedOption != null && selectedOption !== index}
                             />
                             {option}
                             </li>
