@@ -1,8 +1,9 @@
 "use client";
 
-
 import QuizResultCard from "./quizResultCard";
 import { useState} from "react";
+import { useReducer } from "react";
+import { answerReducer, AnswerMap } from "@/reducers/useReducer";
 
 interface QuesProps {
     id:number;
@@ -11,11 +12,7 @@ interface QuesProps {
     answer: number;
 }
 
-interface AnswerMap { 
-    [questionId: number]: number
-     
-    
-}
+
 
 export default function McqQues() {
 
@@ -35,9 +32,9 @@ export default function McqQues() {
     const [score, setScore] = useState<number>(0);
     const [clicked, setClicked]= useState<boolean>(false);
     const [disablded, setDisablded]= useState<boolean>(false);
-    const [answer, setAnswer] = useState<AnswerMap >({})
+    // const [answer, setAnswer] = useState<AnswerMap >({})
 
-
+    const[answer, dispatch] = useReducer(answerReducer, {})
 
     const currentQuestion = questions[index];
     
@@ -46,15 +43,15 @@ export default function McqQues() {
     
 
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    // const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
 
-        const answerone = Number(e.target.value);
-        setSelectedOption(answerone);
+    //     const answerone = Number(e.target.value);
+    //     setSelectedOption(answerone);
         
 
-        setAnswer(prev => ({...prev , [currentQuestion.id] :answerone  }))
+    //     // setAnswer(prev => ({...prev , [currentQuestion.id] :answerone  }))
           
-    }
+    // }
     const handleSubmit = () =>{
 
             if(selectedOption == currentQuestion.answer)  {
@@ -78,12 +75,13 @@ export default function McqQues() {
             }
             console.log("clicked Prev")
              console.log("prev", currentQuestion.id);
-            if(selectedOption != null){
-            setAnswer(prev => ({
-                ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
-            }
+            // if(selectedOption != null){
+            // setAnswer(prev => ({
+            //     ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
+            // }
            
              console.log("anwer: ", answer);
+             
             
     }
     
@@ -98,10 +96,10 @@ export default function McqQues() {
                 console.log("Score:" ,score)
             } 
             }
-             if(selectedOption != null){
-            setAnswer(prev => ({
-                ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
-            }
+            //  if(selectedOption != null){
+            // setAnswer(prev => ({
+            //     ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
+            // }
             console.log("clicked Next")
                console.log("answer map", answer); 
     }
@@ -129,9 +127,15 @@ export default function McqQues() {
                             type="radio"
                             name="mcq"
                             value={index}
-                            onChange={handleOnChange}
-                            checked = {selectedOption === index}
-                            disabled={selectedOption != null && selectedOption !== index}
+                            onChange={() =>{
+                                dispatch({
+                                    type: "SELECT_ANSWER",
+                                    questionId:currentQuestion.id,
+                                    optionIndex:index
+                                })
+                            } }
+                            checked = { answer[currentQuestion.id] === index}
+                            disabled={answer[currentQuestion.id] !== undefined && answer[currentQuestion.id] !== index}
                             />
                             {option}
                             </li>
