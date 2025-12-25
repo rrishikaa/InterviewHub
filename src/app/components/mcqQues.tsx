@@ -3,7 +3,7 @@
 import QuizResultCard from "./quizResultCard";
 import { useState} from "react";
 import { useReducer } from "react";
-import { answerReducer, AnswerMap } from "@/reducers/useReducer";
+import { answerReducer } from "@/reducers/useReducer";
 
 interface QuesProps {
     id:number;
@@ -28,33 +28,21 @@ export default function McqQues() {
    
 
     const[index, setIndex] = useState(0);
-    const[selectedOption, setSelectedOption] = useState<number | null>(null);
+   
     const [score, setScore] = useState<number>(0);
     const [clicked, setClicked]= useState<boolean>(false);
     const [disablded, setDisablded]= useState<boolean>(false);
-    // const [answer, setAnswer] = useState<AnswerMap >({})
+
 
     const[answer, dispatch] = useReducer(answerReducer, {})
 
     const currentQuestion = questions[index];
     
 
-    // const showAnswer= answer ? !!answer[currentQuestion.id] : false
-    
-
-
-    // const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-
-    //     const answerone = Number(e.target.value);
-    //     setSelectedOption(answerone);
-        
-
-    //     // setAnswer(prev => ({...prev , [currentQuestion.id] :answerone  }))
-          
-    // }
+   
     const handleSubmit = () =>{
 
-            if(selectedOption == currentQuestion.answer)  {
+            if(answer[currentQuestion.id] == currentQuestion.answer)  {
                 setScore(score+1)}
             console.log("submit:" ,score)
             setClicked(true);
@@ -65,7 +53,7 @@ export default function McqQues() {
     
     
     
-     console.log("selected",selectedOption);
+     
      console.log("current", currentQuestion.id);
    
      const handlePrev = () =>{
@@ -75,10 +63,7 @@ export default function McqQues() {
             }
             console.log("clicked Prev")
              console.log("prev", currentQuestion.id);
-            // if(selectedOption != null){
-            // setAnswer(prev => ({
-            //     ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
-            // }
+           
            
              console.log("anwer: ", answer);
              
@@ -90,16 +75,13 @@ export default function McqQues() {
             if(index >= 0){
                 setIndex(index+1);
                
-                setSelectedOption(null);
-                if(selectedOption == currentQuestion.answer)  {
+                
+                if(answer[currentQuestion.id] == currentQuestion.answer)  {
                 setScore(score+1)
                 console.log("Score:" ,score)
             } 
             }
-            //  if(selectedOption != null){
-            // setAnswer(prev => ({
-            //     ...prev ,[ currentQuestion.id] : currentQuestion.answer}))
-            // }
+        
             console.log("clicked Next")
                console.log("answer map", answer); 
     }
@@ -144,7 +126,7 @@ export default function McqQues() {
                      </ul>
                      
 
-                     {selectedOption!= null && ( selectedOption == currentQuestion.answer? (<div className="mt-4 flex w-full">
+                     {answer[currentQuestion.id]!= null && ( answer[currentQuestion.id] == currentQuestion.answer? (<div className="mt-4 flex w-full">
                         <h2 className="text-emerald-600 font-semibold p-2 py-2">Correct Answer!! </h2>
                         </div> ):(<div className="mt-4 flex w-full p-2 py-2">
                              <h2 className="text-orange-700 font-semibold">The answer you selected is wrong.</h2></div>))}
