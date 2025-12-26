@@ -1,7 +1,7 @@
 "use client";
 
 import QuizResultCard from "./quizResultCard";
-import { useState} from "react";
+import {useState ,useEffect} from "react";
 import { useReducer } from "react";
 import { answerReducer } from "@/reducers/useReducer";
 
@@ -15,6 +15,9 @@ interface QuesProps {
 
 
 export default function McqQues() {
+    
+    
+   
 
     const questions : QuesProps[]=[
         {id:1 , question: "What is your name?" , options:["Rishika", "Priya" ,"Sejal", "Tara"] ,answer:3},
@@ -86,13 +89,40 @@ export default function McqQues() {
                console.log("answer map", answer); 
     }
 
- 
+    const[timeleft, setTimeleft] = useState(10);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeleft(prev => {
+                if(prev <= 1) {
+                    clearInterval(interval);
+                    return 0;
+                }
+                return prev - 1 ;
+                    
+            });
+        
+        }, 1000);
+         
+    return () => clearTimeout(interval);
+    },[timeleft]);
+
+    // useEffect(() => {
+    //     if (timeleft <= 0) {
+    //       handleSubmit();
+    //     }
+    
+    // } ,[])
+    // if(timeleft == 0){
+    //     handleSubmit();
+    // }
 
 
     return (
         <>
+         <div className="w-40 h-10 p-4 flex items-center justify-center border border-fuchsia-50 rounder-3xl ml-auto ">Time : {timeleft}/ 10</div>
         <div className=" mt-8 flex-row  border border-fuchsia-50  rounded-lg shadow-md w-full h-full  justify-center items-center overflow-hidden text-left">
-             <div  className=" h-10 w-full  flex items-center justify center px-3 py-4 font-bold text-2xl ">Question {currentQuestion.id}</div>
+             <div  className=" h-10 w-full  flex items-center px-3 py-4 font-bold text-2xl ">Question {currentQuestion.id}</div>
              <div className="h-0.5 w-full bg-fuchsia-50"></div>
             <div className="flex-row text-lg pl-4 px-3 text-white font-semibold wrap-break-word mt-4">
                
