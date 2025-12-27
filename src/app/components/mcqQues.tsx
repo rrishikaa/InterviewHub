@@ -9,7 +9,7 @@ interface QuesProps {
     id:number;
     question: string;
     options: string[];
-    answer: number;
+    ans: number;
 }
 
 
@@ -20,11 +20,11 @@ export default function McqQues() {
    
 
     const questions : QuesProps[]=[
-        {id:1 , question: "What is your name?" , options:["Rishika", "Priya" ,"Sejal", "Tara"] ,answer:3},
-        {id:2 , question: "What is your State?" , options:["UP", "MP" ,"Karnataka", "Rajasthan"] ,answer:0},
-        {id:3 , question: "What is your Gender?" , options:["Male", "Female" ,"Binary", "no specification"] ,answer:1},
-        {id:4 , question: "What is your hobby?" , options:["dance", "art" ,"music", "sports"] ,answer:3},
-        {id:5 , question: "What is your age?" , options:["5", "9" ,"8", "12"] ,answer:2}
+        {id:1 , question: "What is your name?" , options:["Rishika", "Priya" ,"Sejal", "Tara"] ,ans:3},
+        {id:2 , question: "What is your State?" , options:["UP", "MP" ,"Karnataka", "Rajasthan"] ,ans:0},
+        {id:3 , question: "What is your Gender?" , options:["Male", "Female" ,"Binary", "no specification"] ,ans:1},
+        {id:4 , question: "What is your hobby?" , options:["dance", "art" ,"music", "sports"] ,ans:3},
+        {id:5 , question: "What is your age?" , options:["5", "9" ,"8", "12"] ,ans:2}
 
     ];
 
@@ -32,7 +32,7 @@ export default function McqQues() {
 
     const[index, setIndex] = useState(0);
    
-    const [score, setScore] = useState<number>(0);
+    const[timeleft, setTimeleft] = useState(120);
     const [clicked, setClicked]= useState<boolean>(false);
     const [disablded, setDisablded]= useState<boolean>(false);
 
@@ -41,15 +41,14 @@ export default function McqQues() {
 
     const currentQuestion = questions[index];
     
-
+    const totalScore = Object.values(answer).filter(a => a.correct).length;
    
     const handleSubmit = () =>{
 
-            if(answer[currentQuestion.id] == currentQuestion.answer)  {
-                setScore(score+1)}
-            console.log("submit:" ,score)
+            
             setClicked(true);
             setDisablded(true);
+            setTimeleft(0)
             console.log(disablded);
     }
 
@@ -79,23 +78,22 @@ export default function McqQues() {
                 setIndex(index+1);
                
                 
-                if(answer[currentQuestion.id] == currentQuestion.answer)  {
-                setScore(score+1)
-                console.log("Score:" ,score)
-            } 
+               
             }
         
             console.log("clicked Next")
                console.log("answer map", answer); 
     }
 
-    const[timeleft, setTimeleft] = useState(10);
+    
+    
     
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeleft(prev => {
                 if(prev <= 1) {
                     clearInterval(interval);
+                    handleSubmit();
                     return 0;
                 }
                 return prev - 1 ;
@@ -104,23 +102,18 @@ export default function McqQues() {
         
         }, 1000);
          
-    return () => clearTimeout(interval);
-    },[timeleft]);
+    return () => clearInterval(interval);
+    },[]);
 
-    // useEffect(() => {
-    //     if (timeleft <= 0) {
-    //       handleSubmit();
-    //     }
-    
-    // } ,[])
-    // if(timeleft == 0){
-    //     handleSubmit();
-    // }
-
+   const formattedTime = (seconds:number) =>{
+        const minutes = Math.floor(seconds/ 60);
+        const sec = seconds % 60;
+        return `${minutes.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+   };
 
     return (
         <>
-         <div className="w-40 h-10 p-4 flex items-center justify-center border border-fuchsia-50 rounder-3xl ml-auto ">Time : {timeleft}/ 10</div>
+         <div className="w-40 h-10 p-4 flex items-center justify-center border border-fuchsia-50 rounder-3xl ml-auto ">Time : {formattedTime(timeleft)}</div>
         <div className=" mt-8 flex-row  border border-fuchsia-50  rounded-lg shadow-md w-full h-full  justify-center items-center overflow-hidden text-left">
              <div  className=" h-10 w-full  flex items-center px-3 py-4 font-bold text-2xl ">Question {currentQuestion.id}</div>
              <div className="h-0.5 w-full bg-fuchsia-50"></div>
@@ -143,11 +136,12 @@ export default function McqQues() {
                                 dispatch({
                                     type: "SELECT_ANSWER",
                                     questionId:currentQuestion.id,
-                                    optionIndex:index
+                                    optionIndex: index,
+                                    correctAnswer: currentQuestion.ans
                                 })
                             } }
-                            checked = { answer[currentQuestion.id] === index}
-                            disabled={answer[currentQuestion.id] !== undefined && answer[currentQuestion.id] !== index}
+                            checked = {answer[currentQuestion.id]?.selected === index}
+                            disabled={answer[currentQuestion.id]?.selected !== undefined && answer[currentQuestion.id]?.selected !== index}
                             />
                             {option}
                             </li>
@@ -156,14 +150,14 @@ export default function McqQues() {
                      </ul>
                      
 
-                     {answer[currentQuestion.id]!= null && ( answer[currentQuestion.id] == currentQuestion.answer? (<div className="mt-4 flex w-full">
+                     {answer[currentQuestion.id]!= null && ( answer[currentQuestion.id].selected == currentQuestion.ans? (<div className="mt-4 flex w-full">
                         <h2 className="text-emerald-600 font-semibold p-2 py-2">Correct Answer!! </h2>
                         </div> ):(<div className="mt-4 flex w-full p-2 py-2">
                              <h2 className="text-orange-700 font-semibold">The answer you selected is wrong.</h2></div>))}
                             
             </div>
             {clicked && <div className="p-4 item-center justify-center z-50 top-12">
-                               <QuizResultCard title= "Quiz Completed." score={score}/></div>}
+                               <QuizResultCard title= "Quiz Completed." score={totalScore}/></div>}
             <div className="flex gap-4 p-8 items-center justify-center">
                 
                 <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick={handlePrev}>
@@ -178,7 +172,7 @@ export default function McqQues() {
                 
                 <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick={handleNext}>
                     Next
-                </button> }
+                </button> } 
                
                 
             </div>
