@@ -11,12 +11,12 @@ export default function Card({title, content }:CardProps){
     // const [total, seTotal] = useState(0);
 
     return (
-        <div className="flex flex-col  p-6 bg-white rounded-lg shadow-md w-40 h-30 justify-center items-center overflow-hidden text-center">
+        <div className="flex flex-col p-6 bg-white rounded-lg shadow-md w-40 h-30 justify-center items-center overflow-hidden text-center transform transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl">
         {title && 
-        <h2 className="text-lg text-emerald-900 font-semibold wrap-break-word">{title} </h2>}
+        <h2 className="text-lg text-black font-semibold wrap-break-word">{title} </h2>}
 
         {content && 
-        <h2 className="text-2xl text-blue-500 font-bold ml-2 wrap-break-word">{content}</h2>}
+        <h2 className="text-2xl text-[#004E92] font-bold ml-2 wrap-break-word">{content}</h2>}
           
         </div>
     )

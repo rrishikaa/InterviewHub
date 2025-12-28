@@ -34,10 +34,12 @@ export default function Navbar(){
                 </h1>
             </Link>
             
+            <div className="ml-auto py-3">
             {isAuthenticated ?
-            <button onClick={handleLogout} className="ml-auto pr-4 text-[#004E92] hover:active: font-bold">Logout </button>
+            <button onClick={handleLogout} className="flex items-center justify-center p-4 h-10 w-22  text-[#004E92] hover:active: font-bold border-2 border-[#004E92] rounded-md">Logout </button>
             :
-            <button onClick={handleLogin} className="ml-auto pr-4 text-[#004E92] font-bold">Login</button>}
+            <button onClick={handleLogin} className="flex items-center justify-center p-4 h-10 w-22  text-[#004E92] hover:shadow font-bold border-2 border-[#004E92] rounded-md">Login</button>}
+            </div>
         </nav> 
     );
 }
