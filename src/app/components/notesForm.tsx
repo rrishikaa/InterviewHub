@@ -9,6 +9,7 @@ export default function NotesForm(){
 
     const[formData, setFormData] = useState("");
     const[title, setTitle] = useState("");
+    const[bodytext, setBodytext] = useState("");
 
 
     const handleSubmit= (e: React.FormEvent)=>{
@@ -38,8 +39,8 @@ export default function NotesForm(){
                     name="body"
                     className="text-fuchsia-50 p-2 border border-fuchsia-50 rounded-md w-full h-60 resize-none"
                     placeholder="Your text here." 
-                    value={title}
-                    onChange={(e)=>{setTitle(e.target.value)}}
+                    value={bodytext}
+                    onChange={(e)=>{setBodytext(e.target.value)}}
                     required/>
                 </div>
             </form>
