@@ -63,11 +63,11 @@ console.log("showAnswer", showAnswer);
     }
     return (
         <div className=" mt-8 flex-row  border border-fuchsia-50  rounded-lg shadow-md w-full h-full  justify-center items-center overflow-hidden text-left">
-             <div className="flex flex-row h-20 w-full bg-fuchsia-50 p-4">
-            <h2 className=" h-10 w-full flex items-center px-2 py-4  font-bold text-2xl text-[#2d3791] ">{`Question ${currentQuestion.id} : ${currentQuestion.question}`}
+             <div className="flex flex-row h-20 w-full bg-gray-300 p-4">
+            <h2 className=" h-10 w-full flex items-center px-2 py-4  font-bold text-2xl text-[#013664] ">{`Question ${currentQuestion.id} : ${currentQuestion.question}`}
             </h2>
             {!showAnswer &&
-             <button className="border border-b-stone-600 px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-40" onClick ={handleShowAnswer} >
+             <button className="border-2 border-[#004E92] px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#f5f6fb] w-40 tracking-wider" onClick ={handleShowAnswer} >
                     Show Answer
                 </button>}
 
@@ -79,13 +79,13 @@ console.log("showAnswer", showAnswer);
                </div>
              <div className="flex gap-4 p-8 items-center justify-center">
                 {currentQuestion.id  != 1 &&         
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick ={handlePrev} >
+                <button className="flex items-center justify-center px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24 tracking-wider" onClick ={handlePrev} >
                     Previous
                 </button>}
                 
             
                 {questions.length  != currentQuestion.id &&         
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick ={handleNext} >
+                <button className="flex items-center justify-center px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24 tracking-wider" onClick ={handleNext} >
                     Next
                 </button> }
                

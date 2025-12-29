@@ -115,7 +115,7 @@ export default function McqQues() {
         <>
          <div className="w-40 h-10 p-4 flex items-center justify-center border border-fuchsia-50 rounder-3xl ml-auto ">Time : {formattedTime(timeleft)}</div>
         <div className=" mt-8 flex-row  border border-fuchsia-50  rounded-lg shadow-md w-full h-full  justify-center items-center overflow-hidden text-left">
-             <div  className=" h-10 w-full  flex items-center px-3 py-4 font-bold text-2xl ">Question {currentQuestion.id}</div>
+             <div  className=" h-10 w-full  flex items-center px-4 py-4 font-bold text-2xl tracking-wider ">Question {currentQuestion.id}</div>
              <div className="h-0.5 w-full bg-fuchsia-50"></div>
             <div className="flex-row text-lg pl-4 px-3 text-white font-semibold wrap-break-word mt-4">
                
@@ -160,17 +160,17 @@ export default function McqQues() {
                                <QuizResultCard title= "Quiz Completed." score={totalScore}/></div>}
             <div className="flex gap-4 p-8 items-center justify-center">
                 
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick={handlePrev}>
+                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handlePrev}>
                     Previous
                 </button>
                 
                 {currentQuestion.id == questions.length ?
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick={handleSubmit}>
+                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handleSubmit}>
                     Submit
                 </button>  
                 :
                 
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#dfe0e8] w-24" onClick={handleNext}>
+                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handleNext}>
                     Next
                 </button> } 
                
