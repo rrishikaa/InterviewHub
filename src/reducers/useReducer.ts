@@ -7,7 +7,17 @@ export type AnswerAction = {
     questionId:number,
     optionIndex:number,
     correctAnswer:number
-}
+};
+
+export interface NotesMap {
+    [notesId:number]: string;
+};
+
+export type NotesAction = {
+    type: "ADD_ANSWER",
+    notesId: number,
+    notesData: string
+};
 
 
 export const answerReducer = (
@@ -27,4 +37,24 @@ export const answerReducer = (
             return state;
 
     }
+}
+
+export const notesArrayReducer =(
+    state:NotesMap,
+    action: NotesAction
+
+):NotesMap => {
+ 
+    switch(action.type){
+        case "ADD_ANSWER":
+        if(action.notesData){
+            return state;
+        }
+        return {...state, [action.notesId]:action.notesData};
+
+        default:
+            return state;
+        
+    }
+   
 };

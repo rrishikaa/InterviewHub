@@ -1,23 +1,37 @@
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useReducer } from "react";
+import {notesArrayReducer} from "@/reducers/useReducer"
 
 
 export default function NotesForm(){
 
     const[title, setTitle] = useState("");
     const[bodytext, setBodytext] = useState("");
+    const [notes, dispatch] = useReducer(notesArrayReducer, [])
 
     const formData = title + " " + bodytext;
 
     const HandleSubmit= (e: React.FormEvent)=>{
         e.preventDefault();
-        localStorage.setItem("formData", formData);
+        localStorage.setItem("formData", JSON.stringify(formData));
         setTitle("");
         setBodytext("");
-           
+        const notesId = Date.now();
+        dispatch({
+            type: "ADD_ANSWER",
+            notesId:notesId,
+            notesData:formData
+
+        })
+        
     }
+    
+
+    useEffect(() => {
+        console.log('Notes updated:', notes);
+      }, [notes]);
 
 
     return(
@@ -27,13 +41,14 @@ export default function NotesForm(){
                 <div className="relative w-full">
                     <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-widest">Title</h2>
                     <textarea
-                    id=""
+                    id="1"
                     rows={1}
                     name="title"
                     className="text-fuchsia-50 p-2 border border-fuchsia-50 rounded-md w-full resize-none flext items-center justify-center bg-white/10"
                     placeholder="Enter your title." 
                     value={title}
                     onChange={(e)=>{setTitle(e.target.value)}}
+
                     required/>
                 </div>
                 <div className="relative w-full mt-4">
