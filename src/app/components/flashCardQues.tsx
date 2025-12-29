@@ -26,7 +26,7 @@ export default function FlashcardQues(){
     ]
 
     const [index, setIndex] = useState(0);
-    // const [showAnswer, setShowAnswer] = useState<boolean>(false);
+    
     const [storeanswer, setStoreanswer] = useState<AnswerMap | null>({});
      
     
@@ -35,13 +35,10 @@ export default function FlashcardQues(){
     const currentQuestion = questions[index];
     const showAnswer = storeanswer ? !!storeanswer[currentQuestion.id] : false;
 console.log("showAnswer", showAnswer);
-    // useEffect(()=>{
-    //     setShowAnswer(storeanswer ? !!storeanswer[currentQuestion.id] : false);
-    // },[index, currentQuestion.id, storeanswer])
     
  
     const handleShowAnswer = () => {
-        // setShowAnswer(true);
+       
         setStoreanswer(prev =>({...prev, [currentQuestion.id]: true}))
     }
 

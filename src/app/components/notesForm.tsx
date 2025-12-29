@@ -14,6 +14,8 @@ export default function NotesForm(){
     const HandleSubmit= (e: React.FormEvent)=>{
         e.preventDefault();
         localStorage.setItem("formData", formData);
+        setTitle("");
+        setBodytext("");
            
     }
 
@@ -25,6 +27,7 @@ export default function NotesForm(){
                 <div className="relative w-full">
                     <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-widest">Title</h2>
                     <textarea
+                    id=""
                     rows={1}
                     name="title"
                     className="text-fuchsia-50 p-2 border border-fuchsia-50 rounded-md w-full resize-none flext items-center justify-center bg-white/10"
