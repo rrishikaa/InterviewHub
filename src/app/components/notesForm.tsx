@@ -43,7 +43,7 @@ export default function NotesForm(){
                     onChange={(e)=>{setBodytext(e.target.value)}}
                     required/>
                 </div>
-                <button className="w-full max-w-[80] h-10 mt-4 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] tracking-wider"
+                <button className="button"
                     onClick={HandleSubmit}>Save</button>
             </form>
            

@@ -160,17 +160,17 @@ export default function McqQues() {
                                <QuizResultCard title= "Quiz Completed." score={totalScore}/></div>}
             <div className="flex gap-4 p-8 items-center justify-center">
                 
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handlePrev}>
+                <button className="button" onClick={handlePrev}>
                     Previous
                 </button>
                 
                 {currentQuestion.id == questions.length ?
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handleSubmit}>
+                <button className="button" onClick={handleSubmit}>
                     Submit
                 </button>  
                 :
                 
-                <button className="px-4 py-2 bg-[#ffffff] text-[#000428] rounded hover:bg-[#e7e9f6] w-24" onClick={handleNext}>
+                <button className="button" onClick={handleNext}>
                     Next
                 </button> } 
                

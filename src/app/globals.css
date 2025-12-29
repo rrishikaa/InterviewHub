@@ -19,6 +19,13 @@
   }
 }
 
+@layer components {
+  .button {
+    @apply px-4 py-2 bg-[#ffffff] rounded hover:bg-[#e7e9f6] w-24 text-[#020e7b] ;
+  }
+
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
