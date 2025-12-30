@@ -23,7 +23,7 @@ export default function NotesForm(){
         dispatch({
             type: "ADD_ANSWER",
             notesId:notesId,
-            notesData:formData
+            notesData:formData,
 
         })
         router.push("/dashboard/myNotes")
@@ -41,7 +41,7 @@ export default function NotesForm(){
             <form 
             className=" relative w-full h-140 mt-12 px-20 py-12 border border-fuchsia-50 rounded-xl flex flex-col gap-2">
                 <div className="relative w-full">
-                    <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-widest">Title</h2>
+                    <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-wider">Title</h2>
                     <textarea
                     id="1"
                     rows={1}
@@ -54,7 +54,7 @@ export default function NotesForm(){
                     required/>
                 </div>
                 <div className="relative w-full mt-4">
-                    <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-widest ">Body</h2>
+                    <h2 className="text-fuchsia-50 pl-1.5 mb-2 tracking-wider ">Body</h2>
                     <textarea
                     name="body"
                     className="text-fuchsia-50 p-2 border border-fuchsia-50 rounded-md w-full h-60 resize-none bg-white/10"

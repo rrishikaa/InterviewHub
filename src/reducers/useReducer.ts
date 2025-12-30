@@ -11,6 +11,7 @@ export type AnswerAction = {
 
 export interface NotesMap {
     [notesId:number]: string;
+    
 };
 
 export type NotesAction = {

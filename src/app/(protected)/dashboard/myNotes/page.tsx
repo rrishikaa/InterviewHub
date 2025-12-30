@@ -6,10 +6,13 @@ import NotesForm from "@/app/components/notesForm";
 export default function MyNotes(){
 
     const[clicked , setClicked] = useState(false);
+    
     const handleAddNote =()=>{
+        
         setClicked(prev=> !prev);
 
     }
+   
     console.log("clicked", clicked)
    
     return (
