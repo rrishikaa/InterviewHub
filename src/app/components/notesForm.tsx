@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useReducer } from "react";
 import {notesArrayReducer} from "@/reducers/useReducer"
+import { useRouter } from 'next/navigation';
 
 
 export default function NotesForm(){
@@ -10,12 +11,12 @@ export default function NotesForm(){
     const[title, setTitle] = useState("");
     const[bodytext, setBodytext] = useState("");
     const [notes, dispatch] = useReducer(notesArrayReducer, [])
-
+    const router = useRouter();
     const formData = title + " " + bodytext;
 
     const HandleSubmit= (e: React.FormEvent)=>{
         e.preventDefault();
-        localStorage.setItem("formData", JSON.stringify(formData));
+        localStorage.setItem("formData", JSON.stringify(notes));
         setTitle("");
         setBodytext("");
         const notesId = Date.now();
@@ -25,6 +26,7 @@ export default function NotesForm(){
             notesData:formData
 
         })
+        router.push("/dashboard/myNotes")
         
     }
     
@@ -48,7 +50,7 @@ export default function NotesForm(){
                     placeholder="Enter your title." 
                     value={title}
                     onChange={(e)=>{setTitle(e.target.value)}}
-
+                    maxLength={250}
                     required/>
                 </div>
                 <div className="relative w-full mt-4">
@@ -61,7 +63,7 @@ export default function NotesForm(){
                     onChange={(e)=>{setBodytext(e.target.value)}}
                     required/>
                 </div>
-                <button className="button"
+                <button className="button mt-4"
                     onClick={HandleSubmit}>Save</button>
             </form>
            

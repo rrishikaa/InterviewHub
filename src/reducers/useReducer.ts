@@ -47,7 +47,7 @@ export const notesArrayReducer =(
  
     switch(action.type){
         case "ADD_ANSWER":
-        if(action.notesData){
+        if(!action.notesData){
             return state;
         }
         return {...state, [action.notesId]:action.notesData};
