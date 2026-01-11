@@ -9,16 +9,6 @@ export type AnswerAction = {
     correctAnswer:number
 };
 
-export interface NotesMap {
-    [notesId:number]: string;
-    
-};
-
-export type NotesAction = {
-    type: "ADD_ANSWER",
-    notesId: number,
-    notesData: string
-};
 
 
 export const answerReducer = (
@@ -38,7 +28,20 @@ export const answerReducer = (
             return state;
 
     }
-}
+};
+
+
+export interface NotesMap {
+    [notesId:number]: {title:string, bodytext:string};
+    
+};
+
+export type NotesAction = {
+    type: "ADD_ANSWER",
+    notesId: number,
+    notesData: {title:string, bodytext:string}
+};
+
 
 export const notesArrayReducer =(
     state:NotesMap,
@@ -59,3 +62,35 @@ export const notesArrayReducer =(
     }
    
 };
+
+// export interface DisplayNotesMap {
+//     notesId:number;
+    
+// };
+
+// export type DisplayNotesAction = {
+//     type: "DISPLAY_ANSWER",
+//     notesId: number,
+// };
+
+
+// export const DisplayNotesReducer =(
+//     state:NotesMap,
+//     action: NotesAction
+
+// ):NotesMap => {
+ 
+//     switch(action.type){
+//         case"DISPLAY_ANSWER":
+//         if(!action.notesId){
+//             return state;
+//         }
+//         return {[action.notesId]:action.notesData};
+
+//         default:
+//             return state;
+        
+//     }
+   
+// };
+

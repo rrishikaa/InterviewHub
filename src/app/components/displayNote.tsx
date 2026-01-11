@@ -1,6 +1,6 @@
 "use client";
 
-import {useState } from "react";
+import { useState } from "react";
 // import { useReducer } from "react";
 import { NotesAction} from "@/reducers/useReducer";
 
@@ -8,16 +8,29 @@ import { NotesAction} from "@/reducers/useReducer";
 type NotesFormProps = {
     onSubmitSuccess: () => void;
     dispatch: React.Dispatch<NotesAction>;
+    notesId:number;
+    notes:{[notesId:number]: {title:string, bodytext:string}};
   };
 
-  
-export default function NotesForm({onSubmitSuccess,dispatch}:NotesFormProps){
 
-    const[title, setTitle] = useState("");
-    const[bodytext, setBodytext] = useState("");
-    // const [notes, dispatch] = useReducer(notesArrayReducer, [])
-    
-    // const formData = title + " " + bodytext;
+  
+
+
+
+     // const [notes, dispatch] = useReducer(notesArrayReducer, [])
+export default function DisplayNotes({onSubmitSuccess,dispatch, notesId, notes}:NotesFormProps ){
+    const[title, setTitle] = useState(notes[notesId] ? notes[notesId].title : "");
+    const[bodytext, setBodytext] = useState(notes[notesId] ? notes[notesId].bodytext : "");
+ 
+   
+//     useEffect(() => {
+//     if (notes[notesId]) {
+//         setTitle(notes[notesId].title);
+//         setBodytext(notes[notesId].bodytext);
+//     }
+// }, [notes, notesId]);
+
+//     // const formData = title + " " + bodytext;
 
     const formData = {
         title: title,
@@ -74,7 +87,7 @@ export default function NotesForm({onSubmitSuccess,dispatch}:NotesFormProps){
                     required/>
                 </div>
                 <button className="button mt-4"
-                    onClick={HandleSubmit}>Save</button>
+                    onClick={HandleSubmit}>Update</button>
             </form>
            
         </div>
