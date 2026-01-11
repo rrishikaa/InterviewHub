@@ -23,14 +23,7 @@ export default function DisplayNotes({onSubmitSuccess,dispatch, notesId, notes}:
     const[bodytext, setBodytext] = useState(notes[notesId] ? notes[notesId].bodytext : "");
  
    
-//     useEffect(() => {
-//     if (notes[notesId]) {
-//         setTitle(notes[notesId].title);
-//         setBodytext(notes[notesId].bodytext);
-//     }
-// }, [notes, notesId]);
 
-//     // const formData = title + " " + bodytext;
 
     const formData = {
         title: title,
@@ -60,7 +53,7 @@ export default function DisplayNotes({onSubmitSuccess,dispatch, notesId, notes}:
 
 
     return(
-        <div className="realative w-full h-full px-16 lg:px-48 mb-24">
+        <div className="fixed mt-20 top-0 left-0  w-full h-full px-16 lg:px-48 mb-24  z-10 t-16 bg-linear-to-br from-[#000428] to-[#004E92]">
             <form 
             className=" relative w-full h-140 mt-12 px-20 py-12 border border-fuchsia-50 rounded-xl flex flex-col gap-2">
                 <div className="relative w-full">
