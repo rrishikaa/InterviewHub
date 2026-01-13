@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect} from "react";
 // import { useReducer } from "react";
 import { NotesAction} from "@/reducers/useReducer";
 
@@ -19,37 +19,50 @@ type NotesFormProps = {
 
      // const [notes, dispatch] = useReducer(notesArrayReducer, [])
 export default function DisplayNotes({onSubmitSuccess,dispatch, notesId, notes}:NotesFormProps ){
+
     const[title, setTitle] = useState(notes[notesId] ? notes[notesId].title : "");
     const[bodytext, setBodytext] = useState(notes[notesId] ? notes[notesId].bodytext : "");
- 
+
    
 
+ useEffect(() => {
+        setTitle(notes[notesId] ? notes[notesId].title : "");
+        setBodytext(notes[notesId] ? notes[notesId].bodytext : "");
+      }, [notesId , notes]);
 
-    const formData = {
-        title: title,
-        bodytext: bodytext
-    };
+const formData = {
+    title: title,
+    bodytext: bodytext
+};
 
     const HandleSubmit= (e: React.FormEvent)=>{
         e.preventDefault();
         // localStorage.setItem("formData", JSON.stringify(notes));
+        if(notes[notesId]){
+            dispatch({
+                type:"UPDATE_ANSWER",
+                notesId,
+                notesData:formData
+            });
+        }
+        else{
+            const newid = Date.now();
+            dispatch({
+                type:"ADD_ANSWER",
+                notesId:newid,
+                notesData:formData
+                
+            })
+            }
         setTitle("");
         setBodytext("");
-        const notesId = Date.now();
-        dispatch({
-            type: "ADD_ANSWER",
-            notesId:notesId,
-            notesData:formData,
-
-        })
+       
         onSubmitSuccess();
+        console.log("formData", formData)
+    
         
     }
     
-
-    // useEffect(() => {
-    //     console.log('Notes updated:', notes);
-    //   }, [notes]);
 
 
     return(

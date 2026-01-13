@@ -26,7 +26,7 @@ export default function NotesForm({onSubmitSuccess,dispatch}:NotesFormProps){
 
     const HandleSubmit= (e: React.FormEvent)=>{
         e.preventDefault();
-        // localStorage.setItem("formData", JSON.stringify(notes));
+        //localStorage.setItem("formData", JSON.stringify(notes));
         setTitle("");
         setBodytext("");
         const notesId = Date.now();
@@ -41,9 +41,7 @@ export default function NotesForm({onSubmitSuccess,dispatch}:NotesFormProps){
     }
     
 
-    // useEffect(() => {
-    //     console.log('Notes updated:', notes);
-    //   }, [notes]);
+    
 
 
     return(

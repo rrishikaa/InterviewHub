@@ -58,6 +58,12 @@ export const notesArrayReducer =(
 
         default:
             return state;
+
+        case "UPDATE_ANSWER":
+            const{notesID , notesData}= action;
+            return{
+                ...state, [notesId]:notesData,
+            }
         
     }
    

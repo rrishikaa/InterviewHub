@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useReducer } from "react";
 import {notesArrayReducer} from "@/reducers/useReducer";
 import NotesForm from "@/app/components/notesForm";
-import NotesList from "@/app/components/NotesList";
+import NotesList from "@/app/components/notesList";
 
 export default function MyNotes(){
 
@@ -14,6 +14,8 @@ export default function MyNotes(){
 
     const HandleFormSubmit = ()=>{
         setClicked(false);
+        localStorage.setItem("formData", JSON.stringify(notes));
+
     }
     
     const handleAddNote =()=>{
@@ -31,7 +33,7 @@ export default function MyNotes(){
             {clicked ? <NotesForm onSubmitSuccess={HandleFormSubmit} dispatch={dispatch}/> :
             
              <div className=" items-center p-4 mb-8  ">
-            <NotesList notes={notes}/>
+            <NotesList notes={notes} onSubmitSuccess={HandleFormSubmit} dispatch={dispatch}/>
             <div className=" ml-auto mt-auto p-4 mb-8   ">
             <button className=" flex items-center justify-center ml-auto mt-auto  text-[#004E92] p-4 font-medium w-12 h-12 bg-gray-300 rounded-full text-4xl  " onClick={handleAddNote}>+</button> </div>
             </div>
